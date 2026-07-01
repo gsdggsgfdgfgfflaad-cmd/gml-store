@@ -1,344 +1,720 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GML Store | FiveM Marketplace</title>
-
-<meta name="description" content="GML Store - FiveM marketplace for scripts, tools and products. Instant delivery via Discord ticket system.">
-<meta name="keywords" content="GML Store, FiveM store, GTA V scripts, FiveM marketplace, redENGINE, Shark Menu">
-
-<meta property="og:title" content="GML Store">
-<meta property="og:description" content="FiveM Marketplace - Instant delivery via Discord">
-<meta property="og:url" content="https://gml-store.vercel.app/">
-<meta property="og:type" content="website">
-
-<!-- Google Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "GML Store",
-  "url": "https://gml-store.vercel.app/",
-  "description": "FiveM marketplace for scripts and digital products"
-}
-</script>
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Santurce RP — VIP Coins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Segoe UI;
+/* ─── Reset ─────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* ─── Variables ──────────────────────────────────── */
+:root{
+  --bg:       #09090f;
+  --surface:  #111119;
+  --card:     #16161f;
+  --border:   rgba(255,255,255,0.07);
+  --pink:     #ff2d87;
+  --yellow:   #ffd600;
+  --cyan:     #00d4e8;
+  --peach:    #ffb3cc;
+  --white:    #f0f0f8;
+  --muted:    #555566;
+  --font-display: 'Bangers', cursive;
+  --font-body:    'Inter', sans-serif;
 }
 
 body{
-  background:#070000;
-  color:white;
-  overflow-x:hidden;
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-2;
-}
+/* ─── Scrollbar ──────────────────────────────────── */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--pink);border-radius:4px}
 
+/* ─── Nav ────────────────────────────────────────── */
 nav{
-  display:flex;
-  justify-content:space-between;
-  padding:20px 60px;
-  align-items:center;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 40px;
+  background: rgba(9,9,15,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
 }
 
-nav h1{
-  color:red;
-  font-size:24px;
+.nav-logo{
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, var(--pink), var(--yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-nav a{
-  background:red;
-  padding:10px 15px;
-  border-radius:8px;
-  color:white;
-  text-decoration:none;
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
 }
+.nav-links a:hover{color:var(--white)}
 
+.nav-cta{
+  background: linear-gradient(135deg, var(--pink), #c4006a);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: filter 0.2s;
+}
+.nav-cta:hover{filter:brightness(1.15)}
+
+/* ─── Hero ───────────────────────────────────────── */
 .hero{
-  padding:100px 60px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
 }
 
-.hero h2{
-  font-size:65px;
-  line-height:1.1;
+/* Ambient glow blobs */
+.hero::before{
+  content:'';
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(255,45,135,0.12) 0%, transparent 70%);
+  top:-100px; left:-150px;
+  pointer-events:none;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  width:500px;height:500px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(0,212,232,0.10) 0%, transparent 70%);
+  bottom:-50px; right:-100px;
+  pointer-events:none;
 }
 
-.hero span{
-  color:red;
+.hero-logo{
+  width: min(340px, 72vw);
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 40px rgba(255,45,135,0.35));
+  animation: float 4s ease-in-out infinite;
 }
 
-.hero p{
-  margin-top:15px;
-  color:#aaa;
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
 }
 
-.hero-box{
-  background:rgba(255,0,0,0.05);
-  border:1px solid rgba(255,0,0,0.2);
-  padding:25px;
-  border-radius:15px;
+.hero-tag{
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 14px;
+}
+
+.hero-title{
+  font-family: var(--font-display);
+  font-size: clamp(52px, 9vw, 100px);
+  letter-spacing: 3px;
+  line-height: 0.95;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--yellow) 50%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 18px;
+}
+
+.hero-sub{
+  font-size: clamp(15px, 2vw, 18px);
+  color: #888899;
+  max-width: 480px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+.btn-primary{
+  background: linear-gradient(135deg, var(--pink), #c4006a);
+  color: #fff;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: filter 0.2s, transform 0.15s;
+  box-shadow: 0 8px 30px rgba(255,45,135,0.35);
+}
+.btn-primary:hover{filter:brightness(1.12);transform:translateY(-2px)}
+
+.btn-secondary{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.1);transform:translateY(-2px)}
+
+.hero-server{
+  margin-top: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.server-dot{
+  width: 8px;height:8px;border-radius:50%;
+  background: #2ecc71;
+  box-shadow: 0 0 8px #2ecc71;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+.server-ip{
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+/* ─── Drip divider ───────────────────────────────── */
+.drip{
+  width:100%;
+  height: 48px;
+  overflow:hidden;
+  line-height:0;
+  margin: 0;
+}
+.drip svg{display:block;width:100%;height:100%}
+
+/* ─── Section base ───────────────────────────────── */
+section{padding: 80px 24px}
+
+.section-eyebrow{
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--pink);
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .section-title{
-  padding:0 60px;
-  font-size:22px;
-  color:#aaa;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 64px);
+  letter-spacing: 2px;
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 12px;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:25px;
-  padding:50px 60px;
+.section-sub{
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 500px;
+  margin: 0 auto 56px;
+  line-height: 1.6;
 }
 
-.card{
-  background:rgba(255,0,0,0.05);
-  border:1px solid rgba(255,0,0,0.2);
-  border-radius:15px;
-  overflow:hidden;
-  transition:.3s;
-  height:460px;
-  display:flex;
-  flex-direction:column;
+/* ─── Packages ───────────────────────────────────── */
+#paquetes{background: var(--surface)}
+
+.packages-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 30px red;
+.pkg-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  cursor: default;
 }
 
-.card img{
-  width:90%;
-  height:230px;
-  object-fit:cover;
+.pkg-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background: var(--glow, rgba(255,45,135,0));
+  opacity:0;
+  transition: opacity 0.3s;
+  pointer-events:none;
+  border-radius: 16px;
 }
 
-.content{
-  padding:15px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  flex:1;
+.pkg-card:hover{
+  transform: translateY(-6px);
+  border-color: var(--accent, var(--pink));
+  box-shadow: 0 16px 40px var(--shadow, rgba(255,45,135,0.2));
+}
+.pkg-card:hover::before{opacity:1}
+
+.pkg-card.popular{
+  border-color: var(--pink);
+  box-shadow: 0 0 0 1px rgba(255,45,135,0.3);
 }
 
-.price{
-  color:red;
-  font-size:20px;
+.pkg-badge{
+  position: absolute;
+  top: 14px; right: 14px;
+  background: var(--pink);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 20px;
 }
 
-.old{
-  text-decoration:line-through;
-  color:#777;
-  font-size:13px;
-  margin-left:6px;
+.pkg-icon{font-size: 40px;margin-bottom: 6px}
+.pkg-name{
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+.pkg-coins{
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.pkg-price{
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--yellow);
+  margin: 4px 0;
+}
+.pkg-price span{font-size:16px;font-weight:500;color:var(--muted)}
+
+.pkg-btn{
+  margin-top: 14px;
+  width: 100%;
+  background: linear-gradient(135deg, var(--pink), #c4006a);
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 11px 0;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: filter 0.15s;
+}
+.pkg-btn:hover{filter:brightness(1.12)}
+
+/* Card color variants */
+.pkg-card:nth-child(1){ --accent: var(--cyan);   --shadow: rgba(0,212,232,0.2);   --glow: linear-gradient(160deg,rgba(0,212,232,0.05),transparent) }
+.pkg-card:nth-child(2){ --accent: var(--pink);   --shadow: rgba(255,45,135,0.2);  --glow: linear-gradient(160deg,rgba(255,45,135,0.06),transparent) }
+.pkg-card:nth-child(3){ --accent: var(--yellow);  --shadow: rgba(255,214,0,0.2);   --glow: linear-gradient(160deg,rgba(255,214,0,0.05),transparent) }
+.pkg-card:nth-child(4){ --accent: #bf5fff;        --shadow: rgba(191,95,255,0.2);  --glow: linear-gradient(160deg,rgba(191,95,255,0.06),transparent) }
+
+/* ─── How it works ───────────────────────────────── */
+#como{background: var(--bg)}
+
+.steps{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
 }
 
-.badge{
-  display:inline-block;
-  margin-top:5px;
-  padding:4px 10px;
-  border:1px solid red;
-  border-radius:20px;
-  font-size:12px;
+.steps::before{
+  content:'';
+  position:absolute;
+  top: 36px; left: 12%; right: 12%;
+  height:1px;
+  background: linear-gradient(90deg, transparent, var(--pink), var(--cyan), transparent);
+  opacity: 0.3;
 }
 
-button{
-  margin-top:15px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:10px;
-  background:red;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-  transition:.3s;
+.step{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  position: relative;
 }
 
-button:hover{
-  opacity:0.8;
+.step-num{
+  width: 72px; height:72px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
 }
 
-.info{
-  display:flex;
-  justify-content:space-around;
-  padding:40px;
-  color:#aaa;
-  font-size:13px;
-  border-top:1px solid #220000;
+.step-label{
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 1px;
 }
+
+.step-desc{
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 200px;
+}
+
+/* ─── Stats bar ──────────────────────────────────── */
+.stats-bar{
+  background: linear-gradient(135deg, #13001f, #001a28);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 36px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.stat{
+  flex: 1;
+  max-width: 200px;
+  text-align: center;
+  padding: 0 24px;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child{border-right:none}
+
+.stat-num{
+  font-family: var(--font-display);
+  font-size: 44px;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, var(--pink), var(--yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+
+.stat-label{
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ─── Discord CTA ────────────────────────────────── */
+#discord{
+  background: var(--surface);
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.discord-box{
+  display: inline-block;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px 60px;
+  max-width: 560px;
+  width: 100%;
+}
+
+.discord-icon{font-size: 54px;margin-bottom:16px}
+
+.discord-title{
+  font-family: var(--font-display);
+  font-size: 40px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.discord-sub{
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.btn-discord{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #5865F2;
+  color: #fff;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: filter 0.2s, transform 0.15s;
+  box-shadow: 0 8px 30px rgba(88,101,242,0.35);
+}
+.btn-discord:hover{filter:brightness(1.1);transform:translateY(-2px)}
+
+/* ─── Footer ─────────────────────────────────────── */
+footer{
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-brand{
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, var(--pink), var(--yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-copy{
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.footer-links{
+  display:flex;gap:20px;list-style:none;
+}
+.footer-links a{
+  font-size:12px;color:var(--muted);text-decoration:none;
+  transition:color 0.15s;
+}
+.footer-links a:hover{color:var(--white)}
+
+/* ─── Responsive ─────────────────────────────────── */
+@media(max-width:640px){
+  nav{padding:12px 20px}
+  .nav-links{display:none}
+  .stats-bar{flex-direction:column;align-items:center;gap:24px}
+  .stat{border-right:none;border-bottom:1px solid var(--border);padding-bottom:20px;max-width:100%}
+  .stat:last-child{border-bottom:none}
+  .discord-box{padding:36px 28px}
+  footer{flex-direction:column;align-items:center;text-align:center}
+  .steps::before{display:none}
+}
+
+/* ─── Scroll reveal ─────────────────────────────── */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
 </style>
 </head>
-
 <body>
 
-<canvas id="bg"></canvas>
-
+<!-- NAV -->
 <nav>
-  <h1>GML Store</h1>
-  <a href="https://discord.gg/r8zeRXAeDb" target="_blank">Join Discord</a>
+  <div class="nav-logo">SanturceRP</div>
+  <ul class="nav-links">
+    <li><a href="#paquetes">Paquetes</a></li>
+    <li><a href="#como">¿Cómo funciona?</a></li>
+    <li><a href="#discord">Discord</a></li>
+  </ul>
+  <a href="#paquetes" class="nav-cta">Comprar Coins</a>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div>
-    <h2>GML FiveM <span>Premium</span><br>Web Marketplace</h2>
-    <p>Instant delivery via Discord ticket system.</p>
+  <img src="santurce.png" alt="Santurce RP Logo" class="hero-logo"/>
+  <p class="hero-tag">🪙 Tienda VIP Oficial</p>
+  <h1 class="hero-title">VIP COINS</h1>
+  <p class="hero-sub">Obtén coins, canjea items exclusivos y domina las calles de Santurce RP.</p>
+  <div class="hero-btns">
+    <a href="#paquetes" class="btn-primary">Ver Paquetes</a>
+    <a href="#como" class="btn-secondary">¿Cómo funciona?</a>
   </div>
-
-  <div class="hero-box">
-    ⚡ Fast Delivery<br>
-    🔐 Secure Orders<br>
-    🛠 24/7 Support<br>
-    🚀 Instant Access
+  <div class="hero-server">
+    <div class="server-dot"></div>
+    <span>Servidor:</span>
+    <span class="server-ip">connect tu-ip-aqui</span>
   </div>
 </section>
 
-<div class="section-title">Featured Products</div>
-
-<section class="grid">
-
-  <div class="card">
-    <img src="https://r2.fivemanage.com/N2yv9eU3yUYJTgpoZhvm7/redENGINE-Spoofer.png">
-    <div class="content">
-      <div>
-        <h3>redENGINE Spoofer</h3>
-        <div class="price">$39,99<span class="old">$49,99</span></div>
-        <div class="badge">Limited Stock</div>
-      </div>
-      <button onclick="ticket('redENGINE Spoofer','$39.99')">OPEN TICKET</button>
-    </div>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat reveal">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Jugadores</div>
   </div>
-
-  <div class="card">
-    <img src="https://r2.fivemanage.com/N2yv9eU3yUYJTgpoZhvm7/cab0f45e-ff90-432e-a381-a8df2fb70829.jpg">
-    <div class="content">
-      <div>
-        <h3>Cuentas Pack</h3>
-        <div class="price">$5.00</div>
-        <div class="badge">Hot Deal</div>
-      </div>
-      <button onclick="ticket('Cuentas Pack','$5.00')">OPEN TICKET</button>
-    </div>
+  <div class="stat reveal">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Online</div>
   </div>
-
-  <div class="card">
-    <img src="https://r2.fivemanage.com/N2yv9eU3yUYJTgpoZhvm7/c2df1ded-9f77-4a8c-b166-653de0e740b7.png">
-    <div class="content">
-      <div>
-        <h3>Shark Menu</h3>
-        <div class="price">$50.00</div>
-        <div class="badge">Pro Service</div>
-      </div>
-      <button onclick="ticket('Shark Menu','$50.00')">OPEN TICKET</button>
-    </div>
+  <div class="stat reveal">
+    <div class="stat-num">40</div>
+    <div class="stat-label">Coins / 20 min</div>
   </div>
-
-  <div class="card">
-    <img src="https://r2.fivemanage.com/N2yv9eU3yUYJTgpoZhvm7/gen_spoofer.jpg">
-    <div class="content">
-      <div>
-        <h3>Tiago Spoofer</h3>
-        <div class="price">$120.00</div>
-        <div class="badge">Pro Service</div>
-      </div>
-      <button onclick="ticket('Tiago Spoofer','Ticket')">OPEN TICKET</button>
-    </div>
+  <div class="stat reveal">
+    <div class="stat-num">#1</div>
+    <div class="stat-label">Puerto Rico RP</div>
   </div>
-
-    <div class="card">
-    <img src="https://r2.fivemanage.com/N2yv9eU3yUYJTgpoZhvm7/image.png">
-    <div class="content">
-      <div>
-        <h3>One Click Spoofer</h3>
-        <div class="price">$46.00</div>
-        <div class="badge">Pro Service</div>
-      </div>
-      <button onclick="ticket('One Click Spoofer','Ticket')">OPEN TICKET</button>
-    </div>
-  </div>
-
-</section>
-
-<div class="info">
-  <div>⚡ Instant Tickets</div>
-  <div>🔐 Secure Orders</div>
-  <div>🛠 Support 24/7</div>
-  <div>🚀 GML Store</div>
 </div>
 
+<!-- PAQUETES -->
+<section id="paquetes">
+  <p class="section-eyebrow">Tienda</p>
+  <h2 class="section-title">PAQUETES DE COINS</h2>
+  <p class="section-sub">Compra coins y recíbelos automáticamente en tu personaje. Sin esperas.</p>
+
+  <div class="packages-grid">
+
+    <div class="pkg-card reveal">
+      <div class="pkg-icon">🪙</div>
+      <div class="pkg-name">STARTER</div>
+      <div class="pkg-coins">500 Coins</div>
+      <div class="pkg-price"><span>$</span>4.99</div>
+      <a href="#" class="pkg-btn">Comprar</a>
+    </div>
+
+    <div class="pkg-card popular reveal">
+      <div class="pkg-badge">🔥 Popular</div>
+      <div class="pkg-icon">💰</div>
+      <div class="pkg-name">MAS COMPRADO</div>
+      <div class="pkg-coins">1,200 Coins</div>
+      <div class="pkg-price"><span>$</span>9.99</div>
+      <a href="#" class="pkg-btn">Comprar</a>
+    </div>
+
+    <div class="pkg-card reveal">
+      <div class="pkg-icon">💎</div>
+      <div class="pkg-name">DIAMOND</div>
+      <div class="pkg-coins">3,000 Coins</div>
+      <div class="pkg-price"><span>$</span>19.99</div>
+      <a href="#" class="pkg-btn">Comprar</a>
+    </div>
+
+    <div class="pkg-card reveal">
+      <div class="pkg-icon">👑</div>
+      <div class="pkg-name">ELITE</div>
+      <div class="pkg-coins">8,000 Coins</div>
+      <div class="pkg-price"><span>$</span>49.99</div>
+      <a href="#" class="pkg-btn">Comprar</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como">
+  <p class="section-eyebrow">Proceso</p>
+  <h2 class="section-title">¿CÓMO FUNCIONA?</h2>
+  <p class="section-sub">Tres pasos y tus coins están dentro del servidor.</p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">🛒</div>
+      <div class="step-label">COMPRA</div>
+      <p class="step-desc">Elige tu paquete de coins y completa el pago de forma segura.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">⚡</div>
+      <div class="step-label">ENTREGA</div>
+      <p class="step-desc">Los coins se acreditan automáticamente en tu personaje al instante.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">🎁</div>
+      <div class="step-label">CANJEA</div>
+      <p class="step-desc">Abre /coinshop en el servidor y canjea los items que quieras.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DISCORD -->
+<section id="discord">
+  <div class="discord-box reveal">
+    <div class="discord-icon">🎮</div>
+    <h2 class="discord-title">ÚNETE A LA FAMILIA</h2>
+    <p class="discord-sub">Soporte 24/7, anuncios exclusivos, eventos y mucho más en nuestro Discord oficial.</p>
+    <a href="https://discord.gg/XMqCES3Ewe" target="_blank" class="btn-discord">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+      </svg>
+      Unirse al Discord
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SanturceRP</div>
+  <p class="footer-copy">© 2026 Santurce RP. Todos los derechos reservados.</p>
+  <ul class="footer-links">
+    <li><a href="#">Términos</a></li>
+    <li><a href="#">Privacidad</a></li>
+    <li><a href="#discord">Soporte</a></li>
+  </ul>
+</footer>
+
 <script>
-
-function ticket(product, price){
-  const msg = `
-🎟 NEW ORDER
-
-Product: ${product}
-Price: ${price}
-
-Open ticket to complete purchase.
-`;
-
-  navigator.clipboard.writeText(msg);
-  window.open("https://discord.gg/r8zeRXAeDb","_blank");
-  alert("Copied to clipboard");
-}
-
-const canvas=document.getElementById("bg");
-const ctx=canvas.getContext("2d");
-
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-
-let p=[];
-
-for(let i=0;i<120;i++){
-  p.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    s:Math.random()*2,
-    dx:(Math.random()-0.5)*0.7,
-    dy:(Math.random()-0.5)*0.7
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
   });
-}
+}, { threshold: 0.12 });
 
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="red";
-
-  p.forEach(pt=>{
-    pt.x+=pt.dx;
-    pt.y+=pt.dy;
-
-    if(pt.x<0||pt.x>canvas.width)pt.dx*=-1;
-    if(pt.y<0||pt.y>canvas.height)pt.dy*=-1;
-
-    ctx.beginPath();
-    ctx.arc(pt.x,pt.y,pt.s,0,Math.PI*2);
-    ctx.fill();
-  });
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
